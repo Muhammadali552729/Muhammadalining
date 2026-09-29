@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+</head>
+    <style>
+      html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+      body {
+        font-family:
+          Helvetica Neue,
+          Helvetica,
+          Arial,
+          sans-serif;
+        font-size: 14px;
+      }
+
+      swiper-container {
+        
+        width: 1216px;
+        height: 516px;
+      }
+
+      swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #444;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      swiper-slide img {
+        display: block;
+        width: 1216px;
+        height: 516px;
+        object-fit: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+<body>
+  <nav>
+    <div class="flex gap-[20px] mt-[50px] ml-[200px]">
+      <img class="w-[80px] h-[80px] rounded-[20px]"
+        src="https://avatars.mds.yandex.net/get-market-shop-logo/1640367/2a00000196aa80bb70e197338de369a8a992/112x112"
+        alt="">
+      <div class="">
+        <div class="flex items-center justify-center gap-[5px] ml-[-40px]">
+          <h1 class="text-[21px]">M Cosmetic</h1>
+          <button class="flex gap-[5px]">
+            <i class="w-[16px] h-[16px] fa-regular fa-heart" style="color: rgb(0, 92, 255);"></i>
+            <svg color="var(--text-primary)" class="ds-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              fill="none">
+              <path fill="currentColor"
+                d="M10.744 1.313c.52-.119 1.052.168 1.237.67l.034.11 1.746 6.966.03.18c.076.881-.95 1.497-1.704.934l-1.945-1.455a12.8 12.8 0 0 0-.942 2.644l-.045.226c-.07.397-.03.614.02.725.038.085.104.158.267.213.183.062.464.092.869.063a10 10 0 0 0 1.428-.24l.105-.014a.6.6 0 0 1 .377 1.089c-.465.328-1.827 1.673-4.152 1.757l-.228.004c-.892 0-1.982-.212-2.907-.72-.877-.482-1.646-1.258-1.895-2.395l-.043-.231c-.297-1.985.488-3.77 1.233-5.126l-1.77-.487c-1.01-.279-1.055-1.695-.065-2.037l8.239-2.844zm-7.552 3.87 2.097.578.75.207-.39.673c-.836 1.438-1.745 3.151-1.466 5.02l.027.146c.155.718.638 1.242 1.302 1.607.718.394 1.601.571 2.33.571l.361-.012c.434-.03.819-.116 1.163-.23a2 2 0 0 1-.31-.08c-.422-.144-.777-.418-.975-.857-.187-.415-.2-.903-.11-1.423l.055-.268A14 14 0 0 1 9.412 7.52l.335-.596.548.409 2.21 1.652-1.62-6.46z">
+              </path>
+            </svg>
+          </button>
+        </div>
+        <div class="flex gap-[10px]">
+          <div class="">
+            <h1 class="text-[15px]">⭐4.7</h1>
+            <h1 class="text-[12px]">30.6kbaholash</h1>
+          </div>
+          <div class="">
+            <h1 class="text-[15px]">5.5k</h1>
+            <h1 class="text-[12px]">obunachi</h1>
+          </div>
+          <div class="">
+            <h1 class="text-[15px]">103.7k</h1>
+            <h1 class="text-[12px]">buyurmachi</h1>
+          </div>
+        </div>
+      </div>
+      <div class="mt-[-50px]">
+        <img class="ml-[250px] mt-[50] w-[129px] h-[80px]"
+          src="data:image/jpeg;base64,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2CC6qSwHqAqkXJiJ7FHIO4ALDuNpo7lF2dbTRyt7uYbj2HqFnouTRTMamHaappnlE+3Iy6AtL3F0b6mLP2WyAj4gq/RaHstK4PfA+ocP6d+R93RdOi8/x7W98YSpzsmY1NyVqKJsTAyNoawbBrRgBV4VSL2j0ife3wL6iICIiAiIgIiIKS0HuX3C+ogxpGFp2Gy+iYjwV8jOxVPZM8EFl7y7qqoBnLu9HxHuxhXWN5W4QYxPM5Vcz2dV8cOV2/cr7SHgIKBKDs4K0SOfI6K86IdR1VDonAoLkgyxW4ncrgCc5V/G2CsY7P27igySQOq+Ne13QrHOXuV2OLGMlBdREQEREBERAREQEREBERAREQEREBERAREQEREBERAwiIgokjDx5qy5jm9AVkogxRz52ysjmwMu2VStPiLvtIKHyk7AqjBHUY/arzIQDukzdsoEIHLnvV0KxAdyFfQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQFS4cwwVUiC02MtfkHZXURAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQf/2Q=="
+          alt="">
+        <div class="w-[550px] h-[70px] border-[2px] rounded-[15px] ml-[40px]">
+          <i class="fa-solid fa-magnifying-glass" style="color: rgb(0, 92, 255);"></i>
+          <input class="w-[500px] h-[50px]" type="text" placeholder="Do'kondan topish">
+        </div>
+      </div>
+      <div class="flex" data-auto="GLOBAL_DELIVERY_POINT_DATA_AUTO" class="_1IILw ds-flex ds-flex_ai_c wtaOk _120Ra"
+        data-zone-name="deliveryPoint" data-node-id="dfm1_51be_1"
+        data-zone-data="{&quot;id&quot;:&quot;10335&quot;,&quot;regionId&quot;:10335,&quot;selectedDeliveryType&quot;:&quot;region&quot;,&quot;agitationText&quot;:&quot;Manzilni ko'rsating&quot;}"
+        data-baobab-name="deliveryPoint" data-update-attrs="true"><svg width="20" height="20" viewBox="0 0 20 20"
+          fill="none" xmlns="http://www.w3.org/2000/svg" class="_1gFq5 _3y_d8">
+          <mask id="path-1-inside-1_14332_29064" fill="white">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M12.22 16.6631C12.2655 16.5507 12.3574 16.463 12.4721 16.4238C15.4827 15.3961 17.6477 12.5431 17.6477 9.18457C17.6477 4.96088 14.2237 1.53691 10 1.53691C5.77631 1.53691 2.35234 4.96088 2.35234 9.18457C2.35234 12.5459 4.52087 15.4007 7.53524 16.4264C7.65025 16.4655 7.74238 16.5533 7.78786 16.666C8.15312 17.5706 8.82417 18.5768 10.0022 18.5768C11.1815 18.5768 11.8539 17.5685 12.22 16.6631Z">
+            </path>
+          </mask>
+          <path
+            d="M17.6477 9.18457L16.1477 9.18457L16.1477 9.18457H17.6477ZM10 1.53691L10 3.03691L10 1.53691ZM2.35234 9.18457L3.85234 9.18457L2.35234 9.18457ZM10.0022 18.5768L10.0022 17.0768L10.0022 17.0768L10.0022 18.5768ZM7.53524 16.4264L7.05206 17.8464L7.53524 16.4264ZM7.78786 16.666L9.17876 16.1044L7.78786 16.666ZM12.4721 16.4238L12.9568 17.8434L12.4721 16.4238ZM12.22 16.6631L10.8294 16.1008L12.22 16.6631ZM16.1477 9.18457C16.1477 11.8821 14.4094 14.1775 11.9875 15.0043L12.9568 17.8434C16.556 16.6146 19.1477 13.2042 19.1477 9.18457L16.1477 9.18457ZM10 3.03691C13.3953 3.03691 16.1477 5.78931 16.1477 9.18457L19.1477 9.18457C19.1477 4.13246 15.0521 0.0369079 10 0.0369076L10 3.03691ZM3.85234 9.18457C3.85234 5.78931 6.60474 3.03691 10 3.03691L10 0.0369076C4.94788 0.036907 0.852336 4.13246 0.852336 9.18457L3.85234 9.18457ZM8.01841 15.0063C5.59347 14.1812 3.85234 11.8843 3.85234 9.18457L0.852336 9.18457C0.852336 13.2075 3.44827 16.6202 7.05206 17.8464L8.01841 15.0063ZM10.0022 17.0768C9.89274 17.0768 9.79638 17.047 9.65666 16.9058C9.48996 16.7372 9.32263 16.4607 9.17876 16.1044L6.39696 17.2276C6.78813 18.1964 7.809 20.0768 10.0022 20.0768L10.0022 17.0768ZM10.8294 16.1008C10.6851 16.4576 10.5172 16.7352 10.3496 16.9046C10.2089 17.0468 10.1118 17.0768 10.0022 17.0768L10.0022 20.0768C12.1967 20.0767 13.219 18.194 13.6106 17.2254L10.8294 16.1008ZM7.05206 17.8464C6.74944 17.7434 6.51298 17.5149 6.39696 17.2276L9.17876 16.1044C8.97177 15.5918 8.55107 15.1875 8.01841 15.0063L7.05206 17.8464ZM11.9875 15.0043C11.4561 15.1857 11.0363 15.5892 10.8294 16.1008L13.6106 17.2254C13.4947 17.5122 13.2587 17.7403 12.9568 17.8434L11.9875 15.0043Z"
+            fill="currentColor" mask="url(#path-1-inside-1_14332_29064)"></path>
+          <circle cx="9.99999" cy="9.18456" r="1.56249" stroke="currentColor" stroke-width="1.5"></circle>
+        </svg>
+        <div class="ml-[100px]">
+          <div class="wjr9P _2iLJc">
+            <div class="ds-flex ds-flex_ai_c flex gap-[10px]">
+              <div class="ds-flex m ds-flex_ai_e _2IWYc"><span
+                  class="ds-text ds-text_group_core ds-text_weight_reg ds-text_color_text-primary ds-text_typography_text _22iQ6 _3y9SJ ds-text_text_tight ds-text_text_reg">Toshkent</span><span
+                  class="ds-text ds-text_group_core ds-text_weight_reg ds-text_color_text-primary ds-text_typography_text _22iQ6 ds-text_text_tight ds-text_text_reg">&nbsp;•
+                  Manzilni ko'rsating</span></div>
+              <div class="flex items-center justify-center rounded-[10px] w-[60px] h-[32px] bg-[#f0f0f7]">Kirish</div>
+            </div>
+          </div>
+          <div class="flex gap-[20px]">
+            <div class="ml-[]">
+              <i class="ml-[20px] text-[25px] fa-solid fa-globe" style="color: rgb(0, 92, 255);"></i>
+              <h1>O'zbekcha</h1>
+            </div>
+            <div class="">
+              <i class="ml-[20px] text-[25px] fa-solid fa-heart" style="color: rgb(0, 92, 255);"></i>
+              <h1>sevimlilar</h1>
+            </div>
+            <div class="">
+              <i class=" text-[25px] fa-solid fa-cart-shopping" style="color: rgb(0, 92, 255);"></i>
+              <h1>savat</h1>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="">
+    <div class="flex">
+      <button class="w-[75px] h-[36px] bg-[#000] text-[#fff] rounded-[10px] ml-[760px] mt-[40px]">
+        <h1>Asosiy</h1>
+      </button>
+      <button class="w-[100px] h-[36px] bg-[#000] text-[#fff] rounded-[10px] ml-[20px] mt-[40px]">
+        <h1>yangiliklar</h1>
+      </button>
+    </div>
+  </div>
+      <swiper-container
+      class="ml-[200px] mt-[20px] mySwiper"
+      pagination="true"
+      pagination-clickable="true"
+      navigation="true"
+      space-between="30"
+      centered-slides="true"
+      autoplay-delay="2500"
+      autoplay-disable-on-interaction="false"
+    >
+      <swiper-slide><img src="https://avatars.mds.yandex.net/get-marketcms/13194585/cps-1781092906656-nBj11DBJKV/optimize" alt=""></swiper-slide>
+      <swiper-slide><img src="https://avatars.mds.yandex.net/get-marketcms/1533751/cps-1779793128599-E8OodocWQw/optimize" alt=""></swiper-slide>
+      <swiper-slide><img src="https://avatars.mds.yandex.net/get-marketcms/13441379/cps-1781089313711-uIU6r1YwH9/optimize" alt=""></swiper-slide>
+      <swiper-slide><img src="https://avatars.mds.yandex.net/get-marketcms/1534436/cps-1779683766116-YlgWZStyqq/optimize" alt=""></swiper-slide>
+      <swiper-slide><img src="https://avatars.mds.yandex.net/get-marketcms/1523779/cps-1777523114208-OSnZYNEhRr/optimize" alt=""></swiper-slide>
+      <swiper-slide><img src="https://avatars.mds.yandex.net/get-marketcms/1668019/cps-1776843421051-YhPa1bS6UQ/optimize" alt=""></swiper-slide>
+      <swiper-slide><img src="https://avatars.mds.yandex.net/get-marketcms/879900/cps-1777986361170-sF10dKJwbT/optimize" alt=""></swiper-slide>
+      <swiper-slide><img src="https://avatars.mds.yandex.net/get-marketcms/1357599/cps-1777986432332-kE3fSBflzw/optimize" alt=""></swiper-slide>
+      <swiper-slide><img src="https://avatars.mds.yandex.net/get-marketcms/1357599/cps-1777987336269-7eoBO33Chd/optimize" alt=""></swiper-slide>
+    </swiper-container>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-element-bundle.min.js"></script>
+    <div class="flex">
+      <div class="ml-[150px] mt-[50px]">
+        <a href="{% url 'detail' %}"><img class="w-[205px] h-[275px] " src="https://avatars.mds.yandex.net/get-mpic/18412261/2a0000019aca55086c04b45546e97cf4e5b9/600x800_multiply" alt=""></a>
+        <div class=" w-[205px] h-[275px] ">
+          <div class="flex gap-[10px]"><h1 class="flex text-[21px]">52 200 <h1 class="text-[17px]"> so'm</h1></h1></div>
+          <h1 class="text-[14px]">PANTENE Shampun Qalin va qattiq 400ml</h1>
+          <h1>⭐4.7 (618) • 5.9k marta...</h1>
+          <h2>29 sen, BTP • Klik orqali</h2>
+        </div>
+      </div>
+      <div class="ml-[20px] mt-[50px]">
+        <a href="{% url 'detail' %}"><img class="w-[205px] h-[275px] " src="https://avatars.mds.yandex.net/get-mpic/18412261/2a0000019aca55086c04b45546e97cf4e5b9/600x800_multiply" alt=""></a>
+        <div class=" w-[205px] h-[275px] ">
+          <div class="flex gap-[10px]"><h1 class="flex text-[21px]">52 200 <h1 class="text-[17px]"> so'm</h1></h1></div>
+          <h1 class="text-[14px]">PANTENE Shampun Qalin va qattiq 400ml</h1>
+          <h1>⭐4.7 (618) • 5.9k marta...</h1>
+          <h2>29 sen, BTP • Klik orqali</h2>
+        </div>
+      </div>
+      <div class="ml-[20px] mt-[50px]">
+        <a href="{% url 'detail' %}"><img class="w-[205px] h-[275px] " src="https://avatars.mds.yandex.net/get-mpic/18412261/2a0000019aca55086c04b45546e97cf4e5b9/600x800_multiply" alt=""></a>
+        <div class=" w-[205px] h-[275px] ">
+          <div class="flex gap-[10px]"><h1 class="flex text-[21px]">52 200 <h1 class="text-[17px]"> so'm</h1></h1></div>
+          <h1 class="text-[14px]">PANTENE Shampun Qalin va qattiq 400ml</h1>
+          <h1>⭐4.7 (618) • 5.9k marta...</h1>
+          <h2>29 sen, BTP • Klik orqali</h2>
+        </div>
+      </div>
+      <div class="ml-[20px] mt-[50px]">
+        <a href="{% url 'detail' %}"><img class="w-[205px] h-[275px] " src="https://avatars.mds.yandex.net/get-mpic/18412261/2a0000019aca55086c04b45546e97cf4e5b9/600x800_multiply" alt=""></a>
+        <div class=" w-[205px] h-[275px] ">
+          <div class="flex gap-[10px]"><h1 class="flex text-[21px]">52 200 <h1 class="text-[17px]"> so'm</h1></h1></div>
+          <h1 class="text-[14px]">PANTENE Shampun Qalin va qattiq 400ml</h1>
+          <h1>⭐4.7 (618) • 5.9k marta...</h1>
+          <h2>29 sen, BTP • Klik orqali</h2>
+        </div>
+      </div>
+      <div class="ml-[20px] mt-[50px]">
+        <a href="{% url 'detail' %}"><img class="w-[205px] h-[275px] " src="https://avatars.mds.yandex.net/get-mpic/18412261/2a0000019aca55086c04b45546e97cf4e5b9/600x800_multiply" alt=""></a>
+        <div class=" w-[205px] h-[275px] ">
+          <div class="flex gap-[10px]"><h1 class="flex text-[21px]">52 200 <h1 class="text-[17px]"> so'm</h1></h1></div>
+          <h1 class="text-[14px]">PANTENE Shampun Qalin va qattiq 400ml</h1>
+          <h1>⭐4.7 (618) • 5.9k marta...</h1>
+          <h2>29 sen, BTP • Klik orqali</h2>
+        </div>
+      </div>
+      <div class="ml-[20px] mt-[50px]">
+        <a href="{% url 'detail' %}"><img class="w-[205px] h-[275px] " src="https://avatars.mds.yandex.net/get-mpic/18412261/2a0000019aca55086c04b45546e97cf4e5b9/600x800_multiply" alt=""></a>
+        <div class=" w-[205px] h-[275px] ">
+          <div class="flex gap-[10px]"><h1 class="flex text-[21px]">52 200 <h1 class="text-[17px]"> so'm</h1></h1></div>
+          <h1 class="text-[14px]">PANTENE Shampun Qalin va qattiq 400ml</h1>
+          <h1>⭐4.7 (618) • 5.9k marta...</h1>
+          <h2>29 sen, BTP • Klik orqali</h2>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
