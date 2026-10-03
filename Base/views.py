@@ -5,3 +5,6 @@ def home (request):
 
 def detail (request):
     return render (request, "detail.html ")
+
+def info (request):
+    return render (request, "info.html ")
