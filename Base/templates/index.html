@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oltin, Kumush va Ko'mir do'koni</title>
+  <style>
+    :root {
+      --bg: #f3f1ee;
+      --card: #fff;
+      --ink: #1d1a16;
+      --mute: #6b645b;
+      --line: #ddd7ce;
+      --acc: #8a5a00;
+      --accI: #fff
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root {
+        --bg: #141210;
+        --card: #1e1b18;
+        --ink: #f1ece4;
+        --mute: #a39b90;
+        --line: #332e29;
+        --acc: #e0a526;
+        --accI: #1a1200
+      }
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.5
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid var(--acc);
+      outline-offset: 2px
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 5
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px
+    }
+
+    .btn {
+      background: var(--acc);
+      color: var(--accI);
+      border: 0;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-weight: 700
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line)
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 20px 60px
+    }
+
+    .hero h2 {
+      font-size: clamp(28px, 5vw, 44px);
+      line-height: 1.1;
+      margin: 10px 0 8px
+    }
+
+    .hero p {
+      color: var(--mute);
+      margin: 0;
+      max-width: 55ch
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 22px 0
+    }
+
+    .tabs button {
+      padding: 8px 16px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 20px
+    }
+
+    .tabs button[aria-pressed=true] {
+      background: var(--acc);
+      color: var(--accI);
+      border-color: var(--acc)
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px
+    }
+
+    .item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column
+    }
+
+    .pic {
+      padding: 16px;
+      background: var(--bg)
+    }
+
+    .pic svg {
+      width: 100%;
+      height: 110px;
+      display: block
+    }
+
+    .info {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1
+    }
+
+    .info h3 {
+      margin: 0;
+      font-size: 18px
+    }
+
+    .spec {
+      color: var(--mute);
+      font-size: 13px;
+      font-family: system-ui, sans-serif
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 700;
+      margin-top: auto
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      display: none;
+      justify-content: flex-end;
+      z-index: 10
+    }
+
+    .overlay.open {
+      display: flex
+    }
+
+    .panel {
+      background: var(--card);
+      width: min(420px, 100%);
+      height: 100%;
+      overflow: auto;
+      padding: 20px;
+      font-family: system-ui, sans-serif
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .row small {
+      color: var(--mute);
+      display: block
+    }
+
+    .total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 16px 0
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 10px 0 4px
+    }
+
+    .panel input,
+    .panel select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--ink);
+      font: inherit
+    }
+
+    .err {
+      color: #d93636;
+      font-size: 13px;
+      min-height: 18px;
+      margin-top: 6px
+    }
+
+    .ok {
+      text-align: center;
+      padding: 30px 0
+    }
+
+    .note {
+      font-size: 12px;
+      color: var(--mute);
+      margin-top: 30px
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Oltin · Kumush · Ko'mir</h1><button class="btn" id="cartBtn">Savat (<span id="cnt">0</span>)</button>
+  </header>
+  <main>
+    <section class="hero">
+      <h2>Qimmatbaho metallar va ko'mir</h2>
+      <p>Quyma oltin va kumush, shuningdek ko'mir tonnalab. Mahsulotni tanlang, savatga soling, buyurtma bering.</p>
+    </section>
+    <div class="tabs" id="tabs"></div>
+    <div class="grid" id="grid"></div>
+    <p class="note">Bu demo sayt: narxlar taxminiy, buyurtma hech qayerga yuborilmaydi.</p>
+  </main>
+  <div class="overlay" id="ov">
+    <div class="panel" role="dialog" aria-modal="true" aria-label="Savat">
+      <div class="row" style="border:0">
+        <h2 style="margin:0">Savat</h2><button class="btn ghost" id="close">Yopish</button>
+      </div>
+      <div id="items"></div>
+      <div id="checkout"></div>
+    </div>
+  </div>
+  <script>
+    var P = [
+      { id: 1, k: "Oltin", n: "Oltin quyma 1 g", p: 115, d: "999.9 probali, sertifikat bilan", u: "dona" },
+      { id: 2, k: "Oltin", n: "Oltin quyma 10 g", p: 1120, d: "999.9 probali, sertifikat bilan", u: "dona" },
+      { id: 3, k: "Oltin", n: "Oltin quyma 100 g", p: 11000, d: "999.9 probali, sertifikat bilan", u: "dona" },
+      { id: 4, k: "Oltin", n: "Oltin quyma 1 kg", p: 108000, d: "999.9 probali, bank qadoqida", u: "dona" },
+      { id: 5, k: "Kumush", n: "Kumush quyma 10 g", p: 14, d: "999 probali", u: "dona" },
+      { id: 6, k: "Kumush", n: "Kumush quyma 100 g", p: 130, d: "999 probali", u: "dona" },
+      { id: 7, k: "Kumush", n: "Kumush quyma 1 kg", p: 1250, d: "999 probali", u: "dona" },
+      { id: 8, k: "Ko'mir", n: "Ko'mir 1 tonna", p: 75, d: "Angren, o'rtacha fraksiya", u: "tonna" },
+      { id: 9, k: "Ko'mir", n: "Ko'mir 5 tonna", p: 350, d: "Angren, yetkazib berish bilan", u: "partiya" },
+      { id: 10, k: "Ko'mir", n: "Ko'mir 20 tonna (fura)", p: 1350, d: "Angren, to'liq mashina", u: "mashina" }];
+    var cart = {}, tab = "Hammasi", stage = "cart";
+    function $(i) { return document.getElementById(i) }
+    function fmt(n) { return "$" + n.toLocaleString("en-US").replace(/,/g, " ") }
+    function pic(k) {
+      if (k === "Ko'mir") return '<svg viewBox="0 0 200 110"><polygon points="20,100 60,50 90,70 120,30 160,70 185,100" fill="#2a2a2e"/><polygon points="60,50 90,70 70,100 20,100" fill="#3a3a40"/><polygon points="120,30 160,70 140,100 100,100 90,70" fill="#1a1a1d"/></svg>';
+      var a = k === "Oltin" ? ["#f7dc7a", "#c9951b", "#8c6208"] : ["#f4f6f8", "#aab3bc", "#6e7882"];
+      return '<svg viewBox="0 0 200 110"><defs><linearGradient id="g' + k[0] + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + a[0] + '"/><stop offset="1" stop-color="' + a[1] + '"/></linearGradient></defs><polygon points="55,30 145,30 175,90 25,90" fill="url(#g' + k[0] + ')" stroke="' + a[2] + '" stroke-width="2"/><polygon points="65,40 135,40 150,60 50,60" fill="rgba(255,255,255,.35)"/></svg>'
+    }
+    function init() {
+      $("tabs").innerHTML = ["Hammasi", "Oltin", "Kumush", "Ko'mir"].map(function (t) { return '<button aria-pressed="' + (t === tab) + '" data-t="' + t + '">' + t + '</button>' }).join("");
+      $("tabs").onclick = function (e) { var t = e.target.getAttribute("data-t"); if (t) { tab = t; init() } };
+      $("grid").innerHTML = P.filter(function (x) { return tab === "Hammasi" || x.k === tab }).map(function (x) {
+        return '<article class="item"><div class="pic">' + pic(x.k) + '</div><div class="info"><h3>' + x.n + '</h3><div class="spec">' + x.d + '</div><div class="price">' + fmt(x.p) + ' <span class="spec">/ ' + x.u + '</span></div><button class="btn" onclick="add(' + x.id + ')">Savatga qo\'shish</button></div></article>'
+      }).join("");
+    }
+    function find(i) { return P.filter(function (x) { return x.id == i })[0] }
+    function add(i) { cart[i] = (cart[i] || 0) + 1; upd() }
+    function chg(i, d) { cart[i] += d; if (cart[i] <= 0) delete cart[i]; upd(); openCart() }
+    function total() { return Object.keys(cart).reduce(function (t, i) { return t + find(i).p * cart[i] }, 0) }
+    function upd() { $("cnt").textContent = Object.keys(cart).reduce(function (t, i) { return t + cart[i] }, 0) }
+    function openCart() {
+      $("ov").classList.add("open"); if (stage === "done") return;
+      var ids = Object.keys(cart);
+      if (!ids.length) { $("items").innerHTML = '<p class="spec">Savat bo\'sh.</p>'; $("checkout").innerHTML = ""; return }
+      $("items").innerHTML = ids.map(function (i) { var x = find(i); return '<div class="row"><div><b>' + x.n + '</b><small>' + fmt(x.p) + ' × ' + cart[i] + '</small></div><div><button class="btn ghost" aria-label="Kamaytirish" onclick="chg(' + i + ',-1)">−</button> <button class="btn ghost" aria-label="Ko\'paytirish" onclick="chg(' + i + ',1)">+</button></div></div>' }).join("") + '<div class="total"><span>Jami</span><span>' + fmt(total()) + '</span></div>';
+      $("checkout").innerHTML = '<label for="nm">Ism-familiya</label><input id="nm"><label for="ph">Telefon</label><input id="ph" type="tel" placeholder="+998 90 123 45 67"><label for="dl">Olish usuli</label><select id="dl"><option>Ofisdan olib ketish</option><option>Yetkazib berish</option></select><div class="err" id="err"></div><button class="btn" style="width:100%" onclick="order()">Buyurtma berish</button>';
+    }
+    function order() {
+      var n = $("nm").value.trim(), p = $("ph").value.replace(/\D/g, "");
+      if (n.length < 3) { $("err").textContent = "Ism-familiyani kiriting."; return }
+      if (p.length < 9) { $("err").textContent = "Telefon raqamini to'liq kiriting."; return }
+      var no = "OKK-" + Math.floor(10000 + Math.random() * 90000), s = total();
+      cart = {}; upd(); stage = "done"; $("items").innerHTML = "";
+      $("checkout").innerHTML = '<div class="ok"><div style="font-size:46px">✅</div><h2>Buyurtma qabul qilindi</h2><p>Raqam: <b>' + no + '</b><br>Summa: <b>' + fmt(s) + '</b></p><p class="spec">Menejer tez orada bog\'lanadi. Bu demo, haqiqiy to\'lov o\'tmaydi.</p><button class="btn" onclick="stage=\'cart\';$(\'ov\').classList.remove(\'open\')">Yopish</button></div>';
+    }
+    $("cartBtn").onclick = function () { stage = "cart"; openCart() };
+    $("close").onclick = function () { $("ov").classList.remove("open") };
+    $("ov").onclick = function (e) { if (e.target === $("ov")) $("ov").classList.remove("open") };
+    init();
+  </script>
+</body>
+
+</html>

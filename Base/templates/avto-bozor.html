@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Avto Bozor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #eef1f4;
+            --card: #fff;
+            --ink: #14202b;
+            --mute: #5d6b78;
+            --line: #d6dce2;
+            --acc: #1f5eff;
+            --accI: #fff;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #10171e;
+                --card: #18222c;
+                --ink: #e8eef4;
+                --mute: #93a1ae;
+                --line: #2a3743;
+                --acc: #5b8cff;
+                --accI: #07101f
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #10171e;
+            --card: #18222c;
+            --ink: #e8eef4;
+            --mute: #93a1ae;
+            --line: #2a3743;
+            --acc: #5b8cff;
+            --accI: #07101f
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: Manrope, system-ui, sans-serif;
+            line-height: 1.5
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 20px;
+            background: var(--card);
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            z-index: 5
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -.5px
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 3px solid var(--acc);
+            outline-offset: 2px
+        }
+
+        .btn {
+            background: var(--acc);
+            color: var(--accI);
+            border: 0;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-weight: 700
+        }
+
+        .btn.ghost {
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid var(--line)
+        }
+
+        .btn:disabled {
+            opacity: .5;
+            cursor: not-allowed
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 20px 60px
+        }
+
+        .hero {
+            padding: 20px 0 8px
+        }
+
+        .hero h2 {
+            font-size: clamp(28px, 5vw, 44px);
+            line-height: 1.1;
+            margin: 0 0 8px;
+            font-weight: 800;
+            letter-spacing: -1px
+        }
+
+        .hero p {
+            color: var(--mute);
+            margin: 0;
+            max-width: 52ch
+        }
+
+        .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 22px 0
+        }
+
+        .tools input,
+        .tools select {
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--card);
+            color: var(--ink);
+            font: inherit
+        }
+
+        .tools input {
+            flex: 1;
+            min-width: 180px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 18px
+        }
+
+        .car {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column
+        }
+
+        .pic {
+            background: var(--bg);
+            padding: 18px 14px 6px
+        }
+
+        .pic svg {
+            width: 100%;
+            height: auto;
+            display: block
+        }
+
+        .info {
+            padding: 14px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1
+        }
+
+        .info h3 {
+            margin: 0;
+            font-size: 18px
+        }
+
+        .spec {
+            color: var(--mute);
+            font-size: 13px
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: auto
+        }
+
+        .empty {
+            grid-column: 1/-1;
+            text-align: center;
+            color: var(--mute);
+            padding: 40px 0
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .5);
+            display: none;
+            justify-content: flex-end;
+            z-index: 10
+        }
+
+        .overlay.open {
+            display: flex
+        }
+
+        .panel {
+            background: var(--card);
+            width: min(420px, 100%);
+            height: 100%;
+            overflow: auto;
+            padding: 20px;
+            padding-top: calc(20px + env(safe-area-inset-top, 0px));
+            padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px))
+        }
+
+        .panel h2 {
+            margin: 0 0 14px
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .row small {
+            color: var(--mute);
+            display: block
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 800;
+            padding: 16px 0
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 10px 0 4px
+        }
+
+        .panel input,
+        .panel select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--bg);
+            color: var(--ink);
+            font: inherit
+        }
+
+        .ok {
+            text-align: center;
+            padding: 30px 0
+        }
+
+        .ok .big {
+            font-size: 48px
+        }
+
+        .err {
+            color: #d93636;
+            font-size: 13px;
+            min-height: 18px;
+            margin-top: 6px
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Avto Bozor</h1>
+        <button class="btn" id="cartBtn">Savat (<span id="cnt">0</span>)</button>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Mashinangizni tanlang va buyurtma bering</h2>
+            <p>Qidiring, filtrlang, savatga qo'shing va buyurtmani rasmiylashtiring.</p>
+        </section>
+        <div class="tools">
+            <input id="q" type="search" placeholder="Model yoki brend qidirish" aria-label="Qidirish">
+            <select id="brand" aria-label="Brend"></select>
+            <select id="sort" aria-label="Saralash">
+                <option value="0">Saralash</option>
+                <option value="1">Narx: arzonroq</option>
+                <option value="2">Narx: qimmatroq</option>
+                <option value="3">Yangi yil</option>
+            </select>
+        </div>
+        <div class="grid" id="grid"></div>
+    </main>
+
+    <div class="overlay" id="ov">
+        <div class="panel" role="dialog" aria-modal="true" aria-label="Savat">
+            <div class="row" style="border:0;padding-top:0">
+                <h2 style="margin:0">Savat</h2><button class="btn ghost" id="close">Yopish</button>
+            </div>
+            <div id="items"></div>
+            <div id="checkout"></div>
+        </div>
+    </div>
+
+    <script>
+        var CARS = [
+            { id: 1, b: "Chevrolet", n: "Gentra", y: 2024, p: 13500, e: "1.5 L, avtomat", c: "#8e99a6", t: "Sedan" },
+            { id: 2, b: "Chevrolet", n: "Cobalt", y: 2024, p: 12200, e: "1.5 L, mexanika", c: "#e8e8e8", t: "Sedan" },
+            { id: 3, b: "Chevrolet", n: "Onix", y: 2025, p: 15800, e: "1.2 L turbo, avtomat", c: "#c2262e", t: "Sedan" },
+            { id: 4, b: "Chevrolet", n: "Tracker", y: 2025, p: 21500, e: "1.2 L turbo, avtomat", c: "#1f6fb2", t: "SUV" },
+            { id: 5, b: "Kia", n: "K5", y: 2023, p: 34500, e: "2.0 L, avtomat", c: "#20262c", t: "Sedan" },
+            { id: 6, b: "Hyundai", n: "Sonata", y: 2023, p: 33000, e: "2.0 L, avtomat", c: "#6b7a8a", t: "Sedan" },
+            { id: 7, b: "BYD", n: "Song Plus", y: 2025, p: 36500, e: "Gibrid, 1.5 L", c: "#2f8f6b", t: "SUV" },
+            { id: 8, b: "Kia", n: "Sportage", y: 2024, p: 32500, e: "2.0 L, avtomat", c: "#b8bcc2", t: "SUV" },
+            { id: 9, b: "Chevrolet", n: "Damas", y: 2024, p: 9200, e: "0.8 L, mexanika", c: "#f0f0f0", t: "Miniven" }
+        ];
+        var cart = {}, state = {}, stage = "cart";
+        function $(i) { return document.getElementById(i) }
+        function fmt(n) { return "$" + n.toLocaleString("en-US").replace(/,/g, " ") }
+        function svg(c, t) {
+            var h = t === "SUV" ? "M20 78 L30 52 Q34 40 48 38 L88 36 L112 18 Q120 14 132 14 L190 16 Q206 18 214 34 L228 44 Q244 48 246 62 L248 78 Z" :
+                t === "Miniven" ? "M16 78 L22 30 Q24 18 38 16 L196 14 Q212 14 222 30 L240 56 Q248 62 248 78 Z" :
+                    "M16 78 L24 56 Q28 46 42 44 L84 40 L110 18 Q116 14 128 14 L172 14 Q184 16 192 30 L206 44 L232 50 Q248 54 248 66 L250 78 Z";
+            return '<svg viewBox="0 0 264 100" role="img" aria-label="' + t + '"><path d="' + h + '" fill="' + c + '" stroke="rgba(0,0,0,.25)" stroke-width="1.5"/>' +
+                '<path d="M96 40 L114 22 L170 22 L190 40 Z" fill="rgba(180,215,240,.75)"/>' +
+                '<circle cx="64" cy="80" r="15" fill="#1b1f24"/><circle cx="64" cy="80" r="6" fill="#aab"/>' +
+                '<circle cx="204" cy="80" r="15" fill="#1b1f24"/><circle cx="204" cy="80" r="6" fill="#aab"/></svg>'
+        }
+        function init() {
+            var bs = ["Barcha brendlar"].concat(Array.from(new Set(CARS.map(function (c) { return c.b }))));
+            $("brand").innerHTML = bs.map(function (b, i) { return '<option value="' + (i ? b : "") + '">' + b + '</option>' }).join("");
+            ["q", "brand", "sort"].forEach(function (i) { $(i).addEventListener("input", render) });
+            $("cartBtn").onclick = function () { stage = "cart"; openCart() };
+            $("close").onclick = function () { $("ov").classList.remove("open") };
+            $("ov").onclick = function (e) { if (e.target === $("ov")) $("ov").classList.remove("open") };
+            render();
+        }
+        function render() {
+            var q = $("q").value.toLowerCase().trim(), b = $("brand").value, s = $("sort").value;
+            var l = CARS.filter(function (c) { return (!b || c.b === b) && (c.b + " " + c.n).toLowerCase().indexOf(q) > -1 });
+            if (s === "1") l.sort(function (a, b) { return a.p - b.p });
+            if (s === "2") l.sort(function (a, b) { return b.p - a.p });
+            if (s === "3") l.sort(function (a, b) { return b.y - a.y });
+            $("grid").innerHTML = l.length ? l.map(function (c) {
+                return '<article class="car"><div class="pic">' + svg(c.c, c.t) + '</div><div class="info"><h3>' + c.b + ' ' + c.n + '</h3>' +
+                    '<div class="spec">' + c.y + '-yil · ' + c.t + ' · ' + c.e + '</div><div class="price">' + fmt(c.p) + '</div>' +
+                    '<button class="btn" onclick="add(' + c.id + ')">' + (cart[c.id] ? "Savatda (qo'shish)" : "Savatga qo'shish") + '</button></div></article>'
+            }).join("") :
+                '<div class="empty">Hech narsa topilmadi. Qidiruv yoki brendni o\'zgartiring.</div>';
+        }
+        function add(id) { cart[id] = (cart[id] || 0) + 1; upd(); render() }
+        function chg(id, d) { cart[id] = (cart[id] || 0) + d; if (cart[id] <= 0) delete cart[id]; upd(); render(); openCart() }
+        function total() { return Object.keys(cart).reduce(function (t, i) { return t + CARS.filter(function (c) { return c.id == i })[0].p * cart[i] }, 0) }
+        function upd() { $("cnt").textContent = Object.keys(cart).reduce(function (t, i) { return t + cart[i] }, 0) }
+        function openCart() {
+            $("ov").classList.add("open");
+            var ids = Object.keys(cart);
+            if (stage === "done") return;
+            if (!ids.length) { $("items").innerHTML = '<p class="spec">Savat bo\'sh. Mashina tanlab, "Savatga qo\'shish" tugmasini bosing.</p>'; $("checkout").innerHTML = ""; return }
+            $("items").innerHTML = ids.map(function (i) {
+                var c = CARS.filter(function (x) { return x.id == i })[0];
+                return '<div class="row"><div><b>' + c.b + ' ' + c.n + '</b><small>' + fmt(c.p) + ' × ' + cart[i] + '</small></div><div>' +
+                    '<button class="btn ghost" aria-label="Kamaytirish" onclick="chg(' + i + ',-1)">−</button> ' +
+                    '<button class="btn ghost" aria-label="Ko\'paytirish" onclick="chg(' + i + ',1)">+</button></div></div>'
+            }).join("") +
+                '<div class="total"><span>Jami</span><span>' + fmt(total()) + '</span></div>';
+            $("checkout").innerHTML = '<label for="nm">Ism-familiya</label><input id="nm" autocomplete="name">' +
+                '<label for="ph">Telefon</label><input id="ph" type="tel" placeholder="+998 90 123 45 67" autocomplete="tel">' +
+                '<label for="pay">To\'lov turi</label><select id="pay"><option>Naqd pul</option><option>Bank o\'tkazmasi</option><option>Kredit (12 oy)</option><option>Kredit (36 oy)</option></select>' +
+                '<div class="err" id="err"></div><button class="btn" style="width:100%;margin-top:6px" onclick="order()">Buyurtma berish</button>';
+        }
+        function order() {
+            var n = $("nm").value.trim(), p = $("ph").value.replace(/\D/g, "");
+            if (n.length < 3) { $("err").textContent = "Ism-familiyani kiriting."; return }
+            if (p.length < 9) { $("err").textContent = "Telefon raqamini to'liq kiriting."; return }
+            var no = "AB-" + Math.floor(10000 + Math.random() * 90000), sum = total(), pay = $("pay").value;
+            cart = {}; upd(); render(); stage = "done";
+            $("items").innerHTML = "";
+            $("checkout").innerHTML = '<div class="ok"><div class="big">✅</div><h2>Buyurtma qabul qilindi</h2><p>Raqam: <b>' + no + '</b><br>Summa: <b>' + fmt(sum) + '</b><br>To\'lov: ' + pay.replace(/</g, "") +
+                '</p><p class="spec">Menejer ' + n.replace(/</g, "&lt;") + ' bilan tez orada bog\'lanadi. Bu demo: haqiqiy to\'lov o\'tmaydi.</p><button class="btn" onclick="stage=\'cart\';$(\'ov\').classList.remove(\'open\')">Yopish</button></div>';
+        }
+        init();
+    </script>
+</body>
+
+</html>

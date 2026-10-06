@@ -8,3 +8,9 @@ def detail (request):
 
 def info (request):
     return render (request, "info.html ")
+
+def avto_bozor (request):
+    return render (request, "avto-bozor.html ")
+
+def index (request):
+    return render (request, "index.html ")
